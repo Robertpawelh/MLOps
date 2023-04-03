@@ -3,8 +3,10 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+    paths: ["app", dvc.lock, dvc.yaml]
   pull_request:
     branches: [ "main" ]
+    paths: ["app", dvc.lock, dvc.yaml]
 
 jobs:
   test-code:
@@ -19,6 +21,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+#       - name: Pull data from DVC
+#         run: |
+#           dvc remote modify origin --local auth basic
+#           dvc remote modify origin --local user ${{ secrets.DAGSHUB_USERNAME }}
+#           dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
+#           dvc pull
       - name: Execute tests
         run: pytest app/tests --ignore app/tests/test_api.py
       - name: Extract metadata for Docker
