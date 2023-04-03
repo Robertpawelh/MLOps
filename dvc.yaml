@@ -10,5 +10,6 @@ stages:
     deps:
     - app/data/Cat_and_Dog
     - app/src/pipeline/train.py
+    - app/src/models/cnn.py
     outs:
     - app/model/model.pt

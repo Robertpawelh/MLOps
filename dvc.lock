@@ -18,10 +18,13 @@ stages:
       md5: 44bd9d536bb5e569453f6e782309c9e4.dir
       size: 227951549
       nfiles: 10
+    - path: app/src/models/cnn.py
+      md5: 0e9ea446aa1c9bee404ffd20e5edf788
+      size: 3001
     - path: app/src/pipeline/train.py
       md5: 7657b2192c4257846459f6c9303491ba
       size: 1352
     outs:
     - path: app/model/model.pt
-      md5: 0bf25ca48052016b0891775e437c11be
+      md5: f2b65f6172b84b70abae5d1dcf438174
       size: 111144593
