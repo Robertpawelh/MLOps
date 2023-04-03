@@ -1,0 +1,27 @@
+schema: '2.0'
+stages:
+  download_cat_and_dog_dataset:
+    cmd: python3 app/src/pipeline/download_dataset.py
+    deps:
+    - path: app/src/pipeline/download_dataset.py
+      md5: fd2687174082678a9840f93de21de52c
+      size: 600
+    outs:
+    - path: app/data/Cat_and_Dog
+      md5: 44bd9d536bb5e569453f6e782309c9e4.dir
+      size: 227951549
+      nfiles: 10
+  train:
+    cmd: python3 app/src/pipeline/train.py
+    deps:
+    - path: app/data/Cat_and_Dog
+      md5: 44bd9d536bb5e569453f6e782309c9e4.dir
+      size: 227951549
+      nfiles: 10
+    - path: app/src/pipeline/train.py
+      md5: 7657b2192c4257846459f6c9303491ba
+      size: 1352
+    outs:
+    - path: app/model/model.pt
+      md5: 0bf25ca48052016b0891775e437c11be
+      size: 111144593
