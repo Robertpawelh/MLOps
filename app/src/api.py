@@ -46,7 +46,6 @@ async def _predict(request: Request, predictionInput: PredictionInput):
         f.write(response.content)
 
     data = Image.open(io.BytesIO(response.content)).convert('RGB')
-    print(data)
     y_pred = predict(app.package, data)
 
     response = {
