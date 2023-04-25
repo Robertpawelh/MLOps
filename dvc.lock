@@ -3,28 +3,34 @@ stages:
   download_cat_and_dog_dataset:
     cmd: python3 app/src/pipeline/download_dataset.py
     deps:
+    - path: app/config/config.py
+      md5: 45e74b6397f0e3d0596df8c2c6d2bf67
+      size: 1161
     - path: app/src/pipeline/download_dataset.py
-      md5: fd2687174082678a9840f93de21de52c
-      size: 600
+      md5: 94e41cda668fcbebc61806ac0b37c526
+      size: 699
     outs:
     - path: app/data/Cat_and_Dog
-      md5: 44bd9d536bb5e569453f6e782309c9e4.dir
+      md5: c9ac082fbc29d5077c6cdcb1891d4ef8.dir
       size: 227951549
       nfiles: 10
   train:
     cmd: python3 app/src/pipeline/train.py
     deps:
+    - path: app/config/config.py
+      md5: b107ffa534cce82e12cd7d2c8b124d01
+      size: 1132
     - path: app/data/Cat_and_Dog
-      md5: 44bd9d536bb5e569453f6e782309c9e4.dir
+      md5: c9ac082fbc29d5077c6cdcb1891d4ef8.dir
       size: 227951549
       nfiles: 10
     - path: app/src/models/cnn.py
-      md5: 0e9ea446aa1c9bee404ffd20e5edf788
-      size: 3001
+      md5: 1d46c4e674ab9b4d2bbcfddf5f9093b4
+      size: 3016
     - path: app/src/pipeline/train.py
-      md5: 7657b2192c4257846459f6c9303491ba
-      size: 1352
+      md5: ae5c7ab0f9733d58e1a0426ce0a4b126
+      size: 1751
     outs:
     - path: app/model/model.pt
-      md5: f2b65f6172b84b70abae5d1dcf438174
+      md5: 3920004f924f98937f77a339405b9b0f
       size: 111144593
