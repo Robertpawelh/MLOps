@@ -1,11 +1,11 @@
 from datasets import load_from_disk
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+from torchvision import transforms
 from pl_bolts.datamodules.vision_datamodule import VisionDataModule
 from pathlib import Path
 import config.config as cfg
-import os
 import torchvision
+import torch
 
 class CatAndDogDataModule(VisionDataModule):
     def __init__(self, data_dir: str,
@@ -46,16 +46,20 @@ class CatAndDogDataModule(VisionDataModule):
     def train_dataloader(self):
         return DataLoader(self.train_dataset,
                           batch_size=self.batch_size,
-                          num_workers=self.num_workers,
-                          shuffle=True)
+                          num_workers=self.num_workers if cfg.device.type == 'cpu' else 0,
+                          shuffle=True,
+                          generator=torch.Generator(device=cfg.device.type))
 
     def val_dataloader(self):
         return DataLoader(self.val_dataset,
                           batch_size=self.batch_size,
-                          num_workers=self.num_workers,
-                          shuffle=True)
+                          num_workers=self.num_workers if cfg.device.type == 'cpu' else 0,
+                          shuffle=True,
+                          generator=torch.Generator(device=cfg.device.type))
 
     def test_dataloader(self):
         return DataLoader(self.test_dataset,
                           batch_size=self.batch_size,
-                          num_workers=self.num_workers, shuffle=True)
+                          num_workers=self.num_workers if cfg.device.type == 'cpu' else 0, 
+                          shuffle=True,
+                          generator=torch.Generator(device=cfg.device.type))

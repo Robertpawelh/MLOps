@@ -1,20 +1,24 @@
 from typing import Tuple
 from torch import nn
-from src.model_utils.binary_metrics import BinaryMetrics
+from src.ml.model_utils.binary_metrics import BinaryMetrics
 from typing import Dict
 import torch
 import pytorch_lightning as pl
 import time
 import torch
 
-# TODO: early stopping
+
 class CNN(pl.LightningModule):
     def __init__(
         self,
-        model_parameters: Dict,
+        linear_1_size: int = 1024,
+        linear_2_size: int = 512,
+        learning_rate: float = 0.001,
+        epochs: int = 10,
+        **kwargs
     ):
         super(CNN, self).__init__()
-        self.save_hyperparameters()
+
         self.net = nn.Sequential(
             nn.Conv2d(3, 32, 3, 1, 1),
             nn.ReLU(),
@@ -32,17 +36,19 @@ class CNN(pl.LightningModule):
             nn.ReLU(),
             nn.MaxPool2d(2, 2),
             nn.Flatten(),
-            nn.Linear(512 * 7 * 7, 1024),
+            nn.Linear(512 * 7 * 7, linear_1_size),
             nn.ReLU(),
-            nn.Linear(1024, 512),
+            nn.Linear(linear_1_size, linear_2_size),
             nn.ReLU(),
-            nn.Linear(512, 1),
+            nn.Linear(linear_2_size, 1),
             nn.Sigmoid()
         )
 
         self._loss_fn = nn.BCELoss()
-        self._learning_rate = model_parameters['learning_rate']
+        self._learning_rate = learning_rate
         self.metrics = BinaryMetrics(1, self.device)
+
+        self.save_hyperparameters()
 
     def forward(self, x):
         x = self.net(x)
