@@ -33,3 +33,26 @@ stages:
     - path: ../../app/src/ml/nn/cnn.py
       md5: b1778dc5e8c114a7f82bc1b6f5a71fb0
       size: 3120
+  train:
+    cmd: python3 ../../app/src/ml/model_scripts/train.py
+    deps:
+    - path: ../../app/config/config.py
+      md5: 84d23cdd5de237d3b0c67b96c204321d
+      size: 1282
+    - path: ../../app/config/params.yaml
+      md5: 28ec546b504a7b41675a9c968dcb3144
+      size: 832
+    - path: ../../app/data/Cat_and_Dog
+      md5: e11f79c6c7b2585744ebd3f16eb52db5.dir
+      size: 227951549
+      nfiles: 10
+    - path: ../../app/src/ml/model_scripts/train.py
+      md5: dc4e8c21556b53d1f0d19334a74145ce
+      size: 2619
+    - path: ../../app/src/ml/nn/cnn.py
+      md5: b1778dc5e8c114a7f82bc1b6f5a71fb0
+      size: 3120
+    outs:
+    - path: ../../app/models/model.pt
+      md5: b2c34a81962b99e3d192d4aa1cad253e
+      size: 111144593
