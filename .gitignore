@@ -163,5 +163,6 @@ app/images
 app/logs
 
 app/data
-app/model
+app/models
 app/dvc_storage
+pipelines/*/wandb
