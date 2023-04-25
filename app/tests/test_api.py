@@ -12,6 +12,7 @@ def client():
         yield client
 
 def test_prediction_input():
+    # TODO: move it to remote storage
     image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Dogge_Odin.jpg/800px-Dogge_Odin.jpg'
     predictionInput = PredictionInput(image_url=image_url)
     assert predictionInput.image_url == image_url
@@ -22,6 +23,7 @@ def test_prediction_output():
     assert predictionOutput.dog == 0.7
 
 def test_output_format(client):
+    # TODO: move it to remote storage
     image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Dogge_Odin.jpg/800px-Dogge_Odin.jpg'
     predictionInput = PredictionInput(image_url=image_url)
     response = client.post("/predict", json=predictionInput.dict())
@@ -30,6 +32,7 @@ def test_output_format(client):
     assert 'dog' in output
 
 def test_output_probabilities_sum(client):
+    # TODO: move it to remote storage
     image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Dogge_Odin.jpg/800px-Dogge_Odin.jpg'
     predictionInput = PredictionInput(image_url=image_url)
     response = client.post("/predict", json=predictionInput.dict())
@@ -37,24 +40,28 @@ def test_output_probabilities_sum(client):
     assert output['cat'] + output['dog'] == 1
 
 def test_predict(client):
+    # TODO: move it to remote storage
     image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Dogge_Odin.jpg/800px-Dogge_Odin.jpg'
     predictionInput = PredictionInput(image_url=image_url)
     response = client.post("/predict", json=predictionInput.dict())
     assert response.status_code == 200
 
 def test_predict_with_png(client):
+    # TODO: move it to remote storage
     image_url = 'https://w7.pngwing.com/pngs/174/600/png-transparent-cat-animal-lovely-cat.png'
     predictionInput = PredictionInput(image_url=image_url)
     response = client.post("/predict", json=predictionInput.dict())
     assert response.status_code == 200
 
 def test_predict_with_gif(client):
+    # TODO: move it to remote storage
     image_url = 'https://media.tenor.com/fTTVgygGDh8AAAAM/kitty-cat-sandwich.gif'
     predictionInput = PredictionInput(image_url=image_url)
     response = client.post("/predict", json=predictionInput.dict())
     assert response.status_code == 200
 
 def test_predict_with_wrong_url(client):
+    # TODO: move it to remote storage
     image_url = "blablabla.1332fa"
     predictionInput = PredictionInput(image_url=image_url)
     response = client.post("/predict", json=predictionInput.dict())
