@@ -2,13 +2,13 @@
 from fastapi import FastAPI, Request
 from http import HTTPStatus
 from typing import Dict
-from src.schemas import PredictionInput, PredictionOutput
+from src.api.schemas import PredictionInput, PredictionOutput
 from src.models.cnn import CNN
 from pathlib import Path
 from src.pipeline.predict import predict
 from PIL import Image
 from fastapi.exceptions import RequestValidationError
-from src.exception_handler import validation_exception_handler, python_exception_handler
+from src.api.exception_handler import validation_exception_handler, python_exception_handler
 import io
 import config.config as cfg
 import requests
