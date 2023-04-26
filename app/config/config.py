@@ -4,8 +4,7 @@ import torch
 # TODO: don't use python file as config file
 
 BASE_DIR = Path(__file__).parent.parent.absolute()
-WANDB_DIR = Path(BASE_DIR, 'wandb')
-
+WANDB_DIR = Path(BASE_DIR, '.')
 
 CONFIG_DIR = Path(BASE_DIR, 'config')
 DATA_DIR = Path(BASE_DIR, 'data')
@@ -14,6 +13,7 @@ IMAGES_DIR = Path(BASE_DIR, 'images')
 LOGS_DIR = Path(BASE_DIR, 'logs')
 LOGS_DIR_WANDB = Path(BASE_DIR, 'logs', 'wandb')
 
+WANDB_DIR.mkdir(parents=True, exist_ok=True)
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
