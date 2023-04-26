@@ -1,11 +1,4 @@
 stages:
-  download_data:
-    cmd: python3 ../../app/src/ml/dataset_creation/download_dataset.py
-    deps:
-    - ../../app/src/ml/dataset_creation/download_dataset.py
-    - ../../app/config/config.py  # NOTE: replace with params.yaml
-    outs:
-    - ../../app/data/Cat_and_Dog
   train:
     cmd: python3 ../../app/src/ml/model_scripts/train.py
     deps:
@@ -16,7 +9,7 @@ stages:
     - ../../app/config/params.yaml # NOTE: It should be as params key!
     outs:
     - ../../app/models/model.pt
-  optimize_hyperparameters:
+  optimize_hyperparameters_xd:
     cmd: python3 ../../app/src/ml/model_scripts/optimize_hyperparameters.py
     deps:
     - ../../app/data/Cat_and_Dog

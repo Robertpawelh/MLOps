@@ -1,0 +1,10 @@
+default:
+  data_dir: data
+  dataset_name: Cats_and_dogs
+  experiment_group_name: download_data
+download_cats_and_dogs:
+  hf_dataset_path: Bingsu/Cat_and_Dog
+  dataset_name: Cats_and_dogs
+download_aasl:
+  hf_dataset_path: pain/AASL
+  dataset_name: AASL

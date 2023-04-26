@@ -1,0 +1,23 @@
+stages:
+  download_cats_and_dogs:
+    cmd: python3 ../../src/ml/dataset_creation/download_dataset.py --cfg params.yaml --stage download_cats_and_dogs
+    params:
+      - default
+      - download_cats_and_dogs.hf_dataset_path
+      - download_cats_and_dogs.dataset_name
+      - ../../config/global_params.yaml:
+    deps:
+      - ../../src/ml/dataset_creation/download_dataset.py
+    outs:
+      - ../../${default.data_dir}/${download_cats_and_dogs.dataset_name}
+  # download_aasl:
+  #   cmd: python3 ../../src/ml/dataset_creation/download_dataset.py --cfg params.yaml --stage download_aasl
+  #   params:
+  #     - default
+  #     - download_aasl.hf_dataset_path
+  #     - download_aasl.dataset_name
+  #     - ../../config/global_params.yaml:
+  #   deps:
+  #     - ../../src/ml/dataset_creation/download_dataset.py
+  #   outs:
+  #     - ../../${default.data_dir}/${download_aasl.dataset_name}
